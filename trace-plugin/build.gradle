@@ -1,0 +1,25 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:3.5.0'
+    implementation 'org.ow2.asm:asm:6.0'
+    implementation 'org.ow2.asm:asm-commons:6.0'
+}
+repositories {
+    jcenter()
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //设置插件的GAV参数
+            pom.groupId = 'com.iwillow.plugin'
+            pom.artifactId = 'trace'
+            pom.version = '1.0.0'
+            //文件发布到下面目录
+            repository(url: uri('../repo'))
+        }
+    }
+}

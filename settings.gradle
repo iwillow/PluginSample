@@ -1,0 +1,2 @@
+include ':app', ':trace-plugin', ':trace-annotations'
+rootProject.name='PluginSample'
