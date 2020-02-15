@@ -1,2 +1,2 @@
-include ':app', ':trace-plugin', ':trace-annotations'
+include ':app', ':trace-plugin', ':trace-annotations', ':maven-plugin'
 rootProject.name='PluginSample'

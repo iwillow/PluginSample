@@ -1,0 +1,19 @@
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            repository(url: "${plugin_nexus_url}/content/repositories/releases") {
+                authentication(userName: plugin_maven_release_username, password: plugin_maven_release_password)
+            }
+            snapshotRepository(url: "${plugin_nexus_url}/content/repositories/snapshots") {
+                authentication(userName: plugin_maven_snapshot_username, password: plugin_maven_snapshot_password)
+            }
+            pom {
+                artifactId = plugin_artifact_id
+                groupId = plugin_group_id
+                version = plugin_version
+            }
+        }
+    }
+}
