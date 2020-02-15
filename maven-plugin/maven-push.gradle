@@ -2,16 +2,19 @@ apply plugin: 'maven'
 uploadArchives {
     repositories {
         mavenDeployer {
-
+            //本地环境
+            //repository(url: uri('../repo'))
+            //正式环境
             repository(url: "${plugin_nexus_url}/content/repositories/releases") {
                 authentication(userName: plugin_maven_release_username, password: plugin_maven_release_password)
             }
+            //测试环境环境
             snapshotRepository(url: "${plugin_nexus_url}/content/repositories/snapshots") {
                 authentication(userName: plugin_maven_snapshot_username, password: plugin_maven_snapshot_password)
             }
             pom {
-                artifactId = plugin_artifact_id
                 groupId = plugin_group_id
+                artifactId = plugin_artifact_id
                 version = plugin_version
             }
         }

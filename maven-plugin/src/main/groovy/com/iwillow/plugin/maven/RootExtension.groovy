@@ -1,4 +1,4 @@
-package com.iwilliow.app.plugin.maven
+package com.iwillow.plugin.maven
 
 class RootExtension {
     String libGroup = ""

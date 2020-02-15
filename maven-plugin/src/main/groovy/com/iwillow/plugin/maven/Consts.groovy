@@ -1,7 +1,7 @@
-package com.iwilliow.app.plugin.maven
+package com.iwillow.plugin.maven
 
 class Consts {
-    public static final String MAVEN_DEFAULT_GROUP = 'com.iwillow.app'
+    public static final String MAVEN_DEFAULT_GROUP = 'com.iwillow.plugin'
 
     public static final String MAVEN_REMOTE_URL_PREFIX = 'http://maven.iwillow.respository/nexus/content/repositories'
 

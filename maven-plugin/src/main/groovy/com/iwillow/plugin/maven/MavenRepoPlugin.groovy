@@ -1,4 +1,4 @@
-package com.iwilliow.app.plugin.maven
+package com.iwillow.plugin.maven
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -34,7 +34,7 @@ public class MavenRepoPlugin implements Plugin<Project> {
         upload()
 
         project.task('upload',
-                group: 'iwillow',
+                group: 'com.iwillow.plugin',
                 description: 'upload artifact to maven repository',
                 dependsOn: ['uploadArchives']).doLast {
 
@@ -45,7 +45,7 @@ public class MavenRepoPlugin implements Plugin<Project> {
             project.with {
                 task('androidSourcesJar', type: Jar) {
                     classifier = 'sources'
-                    from android.sourceSets.main.java.sourceFiles
+                    from getAndroid().sourceSets.main.java.sourceFiles
                 }
 
                 artifacts {
@@ -83,22 +83,23 @@ public class MavenRepoPlugin implements Plugin<Project> {
                 "isUploadJar: ${extension.isUploadJar}"
 
         project.with {
-            group = extension.libGroup
-            version = extension.libVersion
-
             uploadArchives {
                 repositories {
-                    def localUrl = mavenLocal().url
-
                     mavenDeployer {
-                        repository(url: (isRemote ? MAVEN_REMOTE_URL_RELEASE : localUrl)) {
-                            authentication(userName: MAVEN_RELEASE_USER, password: MAVEN_RELEASE_PASSWORD)
-                        }
-                        snapshotRepository(url: (isRemote ? MAVEN_REMOTE_URL_SNAPSHOT : localUrl)) {
-                            authentication(userName: MAVEN_SNAPSHOT_USER, password: MAVEN_SNAPSHOT_PASSWORD)
-                        }
+                        //repository(url: uri('../repo'))
+                        def localUrl = mavenLocal().url
+                         repository(url: (isRemote ? MAVEN_REMOTE_URL_RELEASE : localUrl)) {
+                             authentication(userName: MAVEN_RELEASE_USER, password: MAVEN_RELEASE_PASSWORD)
+                         }
+
+                         snapshotRepository(url: (isRemote ? MAVEN_REMOTE_URL_SNAPSHOT : localUrl)) {
+                             authentication(userName: MAVEN_SNAPSHOT_USER, password: MAVEN_SNAPSHOT_PASSWORD)
+                         }
+
                         pom {
                             artifactId = extension.libArtifactId
+                            group = extension.libGroup
+                            version = extension.libVersion
                         }
                     }
                 }
